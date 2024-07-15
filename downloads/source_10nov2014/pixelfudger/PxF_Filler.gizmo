@@ -1,0 +1,466 @@
+
+Group {
+ inputs 3
+ name PxF_Filler
+ help "Gaussian in-fill. Useful to remove markers and create clean plates."
+ knobChanged "m = nuke.thisNode()\nkc = nuke.thisKnob()\n\nif kc.name() in \[\"iterations\"]:\n    i = nuke.toNode('Merge1')\n    i2 = nuke.toNode('Invert1')\n    o = nuke.toNode('Transform3')\n    \n    for n in nuke.allNodes():\n      if \"static\" not in n\['label'].getValue():\n          ###print \"i would delete\" + n\['name'].value()\n          nuke.delete(n)\n    \n    \n    slices = int(m\['iterations'].value())\n    step = int(1)\n    for x in range(1,slices+step,step):\n\n      b1 = nuke.nodes.Blur()\n      b1.setInput(0, i)\n      b1\['size'].setSingleValue(False)\n      b1\['size'].setExpression(\"parent.size.w\", 0)\n      b1\['size'].setExpression(\"parent.size.h\", 1)\n\n      b2 = nuke.nodes.Blur()\n      b2.setInput(0, i2)\n      b2\['size'].setSingleValue(False)\n      b2\['size'].setExpression(\"parent.size.w\", 0)\n      b2\['size'].setExpression(\"parent.size.h\", 1)\n\n      g1 = nuke.nodes.Grade()\n      g1.setInput(0, b2)\n      g1\['channels'].setValue('rgba')\n      g1\['blackpoint'].setValue(-0.0001)\n      g1\['disable'].setExpression(\"parent.softEdges ? 0 : 1\")\n\n      m1 = nuke.nodes.Merge()\n      m1.setInput(1, b1)\n      m1.setInput(0, g1)\n      m1\['operation'].setValue(\"divide\")\n      \n      if x < slices:\n         m2 = nuke.nodes.Merge()\n         m2.setInput(1, b2)\n         m2.setInput(0, g1)\n         m2\['operation'].setValue(\"divide\")\n    \n      i = m1\n      i2 = m2\n    \n    o.setInput(0, i)\n\n"
+ tile_color 0x733520ff
+ addUserKnob {20 User}
+ addUserKnob {14 size t "Amount of 'in-fill' for one iteration. " R 0 100}
+ size {1 10}
+ addUserKnob {3 iterations t "How many times the blur/divide operation is repeated."}
+ iterations 10
+ addUserKnob {6 softEdges t "Smoother transition between iterations." -STARTLINE}
+ softEdges true
+ addUserKnob {7 angle t "Adjust the direction of the 'in-fill'. (Has no effect if size.w and size.h are the same value)." R -180 180}
+ addUserKnob {6 blackOutside t "Clamp to format before the 'in-fill'." +STARTLINE}
+ addUserKnob {4 maskChannel t "Which channel from the 'hole_mask' input is used to define the area to be 'in-filled'." M {Red Green Blue Alpha "" ""}}
+ maskChannel Alpha
+ addUserKnob {6 ignoreAlpha l "Don't process Alpha" t "Only process RGB channels and do not 'in-fill' the alpha channel." -STARTLINE}
+ addUserKnob {7 mix t "Dissolve between the effect and the original image."}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {26 t l "" -STARTLINE T "PxF_Filler 3.0.3 - (c) 2014 - Xavier Bourque - www.pixelfudger.com"}
+}
+ Input {
+  inputs 0
+  name mask
+  label static
+  xpos 183
+  ypos 1950
+  number 2
+ }
+ Input {
+  inputs 0
+  name img
+  label static
+  selected true
+  xpos -1073
+  ypos -113
+  addUserKnob {20 User}
+  addUserKnob {7 blur R 0 500}
+  addUserKnob {3 iterations}
+ }
+set N90c6d460 [stack 0]
+push $N90c6d460
+ Input {
+  inputs 0
+  name hole_mask
+  label static
+  xpos 337
+  ypos -851
+  number 1
+ }
+set N3954c950 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle4
+  label static
+  xpos 457
+  ypos -762
+ }
+push $N3954c950
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name Shuffle3
+  label static
+  xpos 373
+  ypos -762
+ }
+push $N3954c950
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name Shuffle2
+  label static
+  xpos 290
+  ypos -762
+ }
+push $N3954c950
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle1
+  label static
+  xpos 207
+  ypos -762
+ }
+ Switch {
+  inputs 4
+  which {{parent.maskChannel i}}
+  name Switch2
+  label static
+  xpos 342
+  ypos -668
+ }
+set N83480aa0 [stack 0]
+push $N83480aa0
+ Transform {
+  rotate {{parent.angle i}}
+  center {2048 1463}
+  name Transform2
+  label static
+  xpos 342
+  ypos -587
+ }
+set N90c69830 [stack 0]
+push $N90c6d460
+ Transform {
+  rotate {{parent.angle i}}
+  center {2048 1463}
+  black_outside {{parent.blackOutside i}}
+  name Transform1
+  label static
+  xpos 137
+  ypos -594
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  label static
+  xpos 137
+  ypos -519
+ }
+push $N90c69830
+ Merge2 {
+  inputs 2
+  operation out
+  name Merge1
+  label static
+  xpos 137
+  ypos -432
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur1
+ }
+push $N90c69830
+ Invert {
+  name Invert1
+  label static
+  xpos 310
+  ypos -479
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur2
+ }
+set N9f991d00 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade1
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set N9ff756b0 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge2
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur3
+ }
+push $N9f991d00
+push $N9ff756b0
+ Merge {
+  inputs 2
+  operation divide
+  name Merge3
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur4
+ }
+set N9ff15c30 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade2
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set N9ff4c7a0 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge4
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur5
+ }
+push $N9ff15c30
+push $N9ff4c7a0
+ Merge {
+  inputs 2
+  operation divide
+  name Merge5
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur6
+ }
+set N9ffaef00 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade3
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set N9fe61570 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge6
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur7
+ }
+push $N9ffaef00
+push $N9fe61570
+ Merge {
+  inputs 2
+  operation divide
+  name Merge7
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur8
+ }
+set N9ffe1340 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade4
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set N9feec5c0 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge8
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur9
+ }
+push $N9ffe1340
+push $N9feec5c0
+ Merge {
+  inputs 2
+  operation divide
+  name Merge9
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur10
+ }
+set Na0022b40 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade5
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set Na00003a0 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge10
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur11
+ }
+push $Na0022b40
+push $Na00003a0
+ Merge {
+  inputs 2
+  operation divide
+  name Merge11
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur12
+ }
+set Na001fa30 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade6
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set N9ffa3940 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge12
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur13
+ }
+push $Na001fa30
+push $N9ffa3940
+ Merge {
+  inputs 2
+  operation divide
+  name Merge13
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur14
+ }
+set N9ff02ed0 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade7
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set Na009ede0 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge14
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur15
+ }
+push $N9ff02ed0
+push $Na009ede0
+ Merge {
+  inputs 2
+  operation divide
+  name Merge15
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur16
+ }
+set N9ff13750 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade8
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set Na00b4440 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge16
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur17
+ }
+push $N9ff13750
+push $Na00b4440
+ Merge {
+  inputs 2
+  operation divide
+  name Merge17
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur18
+ }
+set Na0109660 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade9
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+set Na00f7240 [stack 0]
+ Merge {
+  inputs 2
+  operation divide
+  name Merge18
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur19
+ }
+push $Na0109660
+push $Na00f7240
+ Merge {
+  inputs 2
+  operation divide
+  name Merge19
+ }
+ Blur {
+  size {{parent.size.w} {parent.size.h}}
+  name Blur20
+ }
+ Grade {
+  channels rgba
+  blackpoint -0.0001
+  name Grade10
+  disable {{"parent.softEdges ? 0 : 1"}}
+ }
+ Merge {
+  inputs 2
+  operation divide
+  name Merge20
+ }
+ Transform {
+  rotate {{parent.angle*-1 i}}
+  center {2048 1463}
+  name Transform3
+  label static
+  xpos -163
+  ypos 1431
+ }
+push $N90c6d460
+ Keymix {
+  inputs 3
+  name Keymix1
+  label static
+  xpos -163
+  ypos 1650
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  label static
+  xpos -163
+  ypos 1763
+  disable {{"parent.ignoreAlpha ? 0 : 1" i}}
+ }
+push $N90c6d460
+ Dissolve {
+  inputs 2
+  which {{parent.mix i}}
+  name Dissolve1
+  label static
+  xpos -163
+  ypos 1923
+ }
+ Keymix {
+  inputs 3
+  invertMask true
+  bbox B
+  name Keymix2
+  label static
+  xpos -163
+  ypos 2053
+  disable {{"\[exists parent.input2] ? 0 : 1" x1 0}}
+ }
+ Output {
+  name Output1
+  label static
+  xpos -163
+  ypos 2155
+ }
+end_group
