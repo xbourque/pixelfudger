@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06 Installing AI Models</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+
+<div class="header-bar top">Pixelfudger</div>
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>INSTALLING AI MODELS</h1>
+
+<div class="header-bar bottom">
+    All rights reserved. Do not share or distribute without permission. 
+    &copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+<p>
+    AI <b>models</b> and <b>checkpoints</b> are large files that contain the results of machine learning training. Without models, it is impossible to generate images in ComfyUI.<br>
+    <br>
+    Models can be obtained from two main sources online: <a target="_blank" href="civitai.com">civitai.com</a> and <a target="_blank" href="huggingface.co">huggingface.co</a>. <br>
+    <br>
+    To complete the exercises in this course, we will need multiple AI models: <br>
+    <a target="_blank" href="https://civitai.com/models/4384?modelVersionId=128713">Dreamshaper 8</a><br>
+    <a target="_blank" href="https://civitai.com/models/112902?modelVersionId=354657">DreamShaper XL (Lightning)</a><br>
+    <a target="_blank" href="https://civitai.com/models/133005?modelVersionId=357609">Juggernaut XL (Lightning)</a><br>
+    LORA models<br>
+    Inpaint models<br>
+    ControlNet models<br>
+    IPAdapter models<br>
+    AnimateDiff motion models<br>
+    Upscaler models<br>
+    <br>
+    These files tend to be quite large (up to 6GB per model), so plan enough disk space and time to download them.<br>
+    <br>
+    This document will guide you on how to install the required models for this course.
+</p>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>OPEN THE 'DOWNLOAD MODELS' WORKFLOW</h2>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN COMFYSPACE</h3>
+        <h4><b>Comfyspace Toolbar</b> -> <b>Folder icon</b>.
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager18.png">
+    </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN THE 'DOWNLOAD MODELS' WORKFLOW</h3>
+        <h4>Click on <b>01_GETTING_STARTED_WORKFLOWS</b> -> <b>02_DOWNLOAD_MODELS</b> </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0060.png">
+    </td></tr></table>
+    <p>If prompted, discard your changes to the <code>01_CUSTOM_NODES</code> workflow.
+        <img src="../images/01_INSTALL/workspace_manager20.png"></p>
+
+        <p>A workflow with a list of models to download appears.
+            <img src="../images/01_INSTALL/workspace_manager21.png">
+        </p>
+        <p>Use middle+drag (or space+drag) to move around the node graph.<br>
+           Use the scroll wheel to zoom in and out.  </p>
+</div>
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD CHECKPOINTS</h2>
+
+<div class="task">
+
+        <h3>DOWNLOAD SDXL CHECKPOINTS</h3>
+        <h4>Locate the note titled <b>Checkpoints</b>.<br>
+            Use the links in the table to <b>download</b> <a target="_blank" href="https://civitai.com/api/download/models/354657?type=Model&format=SafeTensor&size=full&fp=fp16">Dreamshaper XL Lightning</a> and 
+            <a target="_blank" href="https://civitai.com/api/download/models/357609?type=Model&format=SafeTensor&size=full&fp=fp16">Juggernaut XL Lightning</a> checkpoints from civitai.com.<br>
+            </h4>
+        <img src="../images/01_INSTALL/workspace_manager22.png">
+
+        <p>Save the <code>.safetensors</code> files to <code>ComfyUI/models/checkpoints/SDXL/lightning</code>.<br>
+            You will need to create the <code>SDXL/lightning</code> sub-folders manually.</p>
+
+
+        <p><code>ComfyUI/</code> refers to your ComfyUI install folder.<br>
+            For ComfyUI installations that were created following this tutorial you can find your own <code>ComfyUI/</code> folder here:<br>
+        Windows: <code>C:\comfyui\portable\ComfyUI</code><br>
+        MacOS: <code>/Applications/ComfyUI/ComfyUI</code><br>
+        Linux: <code>/opt/comfyui/ComfyUI</code>
+        </p>
+        <p>These files can be quite large (6.5GB each). This might take a while to download.</p>
+</div>
+
+
+
+<div class="task">
+
+    <h3>DOWNLOAD AN SD 1.5 CHECKPOINT</h3>
+    <h4>Use the link in the table to download <a target="_blank" href="https://civitai.com/api/download/models/128713?type=Model&format=SafeTensor&size=pruned&fp=fp16">Dreamshaper 8</a> from civitai.com.</h4>
+    </td><td>
+    <img src="../images/01_INSTALL/workspace_manager24.png">
+    <p>Save the <code>.safetensors</code> file to <code>ComfyUI/models/checkpoints/SD15/</code>.<br>
+        You will need to create the <code>SD15</code> sub-folder manually.</p>
+
+    <p>This file is quite large (2GB). This might take a while to download.</p>
+
+</div>
+
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD LORA MODELS</h2>
+
+
+<div class="task">
+
+        <h3>DOWNLOAD LORA MODELS</h3>
+        <h4>Locate the note titled <b>LORA Models</b>.<br>
+            Use the links in the table to download <a target="_blank" href="https://civitai.com/api/download/models/191245?type=Model&format=SafeTensor">Aether_Bubbles_and_Foam</a> and 
+            <a target="_blank" href="https://civitai.com/api/download/models/191091?type=Model&format=SafeTensor">Graphic Portrait</a> from civitai.com.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager25.png">
+        <p>Save both <code>.safetensors</code> files to <code>ComfyUI/models/loras/SDXL/</code>.<br>
+            You will need to create the <code>SDXL</code> sub-folder manually.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD FOOOCUS INPAINT MODELS</h2>
+
+
+<div class="task">
+
+        <h3>DOWNLOAD FOOOCUS INPAINT MODELS</h3>
+        <h4>Locate the note titled <b>Fooocus Inpaint Models</b>.<br>
+            Use the links in the table to download <a target="_blank" href="https://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/fooocus_inpaint_head.pth?download=true">Fooocus Inpaint Head</a> and 
+            <a target="_blank" href="https://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/inpaint_v26.fooocus.patch?download=true">Fooocus Inpaint Patch</a> from huggingface.co.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager26.png">
+        <p>Save the <code>.pth</code> and <code>.patch</code> files to <code>ComfyUI/models/inpaint/SDXL/</code>.<br>
+            You will need to create the <code>inpaint/SDXL</code> sub-folders manually.</p>
+        <p>This file is quite large (1.3GB). This might take a while to download.</p>
+</div>
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD CONTROLNET MODELS</h2>
+
+
+
+<div class="task">
+
+    <h3>DOWNLOAD OPENPOSE CONTROLNET FOR SDXL</h3>
+    <h4>Locate the note titled <b>Control Net Models (SDXL)</b>.<br>
+        Use the link in the table to download the 
+        <a target="_blank" href="https://huggingface.co/thibaud/controlnet-openpose-sdxl-1.0/resolve/main/control-lora-openposeXL2-rank256.safetensors?download=true">OpenPoseXL2</a> ControlNet model from
+        huggingface.co.</h4>
+    </td><td>
+    <img src="../images/01_INSTALL/0039.png">
+    <p>Save the <code>.safetensors</code> file to <code>ComfyUI/models/controlnet/</code>.<br>
+</div>
+
+<div class="task">
+    <h3>DOWNLOAD CONTROLNET MODELS FOR SD1.5</h3>
+    <h4>Use the links in the table to download the
+        <a target="_blank" href="https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_canny_fp16.safetensors?download=true">Canny</a>,
+        <a target="_blank" href="https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11f1p_sd15_depth_fp16.safetensors?download=true">Depth</a> and 
+        <a target="_blank" href="https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_openpose_fp16.safetensors?download=true">OpenPose</a> models from
+        huggingface.co.</h4>
+    </td><td>
+    <img src="../images/01_INSTALL/0040.png">
+    <p>Save <code>.safetensors</code> files to <code>ComfyUI/models/controlnet/</code>.<br>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD IPADAPTER MODELS</h2>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN MANAGER</h3>
+        <h4><b>Toolbar -> Manager</b>
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager29.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN MODEL MANAGER</h3>
+        <h4>Click on <b>Model Manager</b>
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager30.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+
+        <h3>INSTALL IPADAPTER MODELS</h3>
+        <h4>In the search box, search for <code>comfyui ipadapter plus</code>.<br>
+            Enable the <b>top left checkbox</b> to select all the search results.<br>
+            Click on <b>Install</b> (bottom left).</h4>
+
+            <img src="../images/01_INSTALL/0042.png">
+
+        <p>You can check the progress of the downloads in the Terminal where ComfyUI Server was launched.</p>
+        <p>The <code>.safetensors</code> files are installed automatically in <code>ComfyUI/models/ipadapter/</code></p>
+</div>
+
+
+<div class="task">
+
+        <h3>INSTALL IPADAPTER VIT-H MODELS</h3>
+        <h4>In the search box, search for <code>ip-adapter _vit-h</code>.<br>
+            Enable the <b>top left checkbox</b> to select all the search results.<br>
+            Click on <b>Install</b> (bottom left).</h4>
+
+            <img src="../images/01_INSTALL/0043.png">
+
+        <p>You can check the progress of the downloads in the Terminal where ComfyUI Server was launched.</p>
+        <p>The <code>.safetensors</code> files are installed automatically in <code>ComfyUI/models/ipadapter/</code></p>
+</div>
+
+
+<div class="task">
+
+    <h3>INSTALL CLIPVISION MODELS</h3>
+    <h4>In the search box, search for <code>CLIPVision model (IP-Adapter)</code>.<br>
+        Enable the <b>top left checkbox</b> to select all the search results.<br>
+        Click on <b>Install</b> (bottom left).</h4>
+
+        <img src="../images/01_INSTALL/0044.png">
+
+    <p>You can check the progress of the downloads in the Terminal where ComfyUI Server was launched.</p>
+    <p>The <code>.safetensors</code> files are installed automatically in <code>ComfyUI/models/clip_vision/</code></p>
+    <p>These files are 2.53GB and 3.89GB respectively. This might take a while to download.</p>
+</div>
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD UPSCALER MODELS</h2>
+<div class="task">
+
+    <h3>INSTALL UPSCALER MODELS</h3>
+    <h4>In the search box, search for <code>upscaler model</code>.<br>
+        Enable the <b>top left checkbox</b> to select all the search results.<br>
+        Click on <b>Install</b> (bottom left).</h4>
+
+        <img src="../images/01_INSTALL/0045.png">
+
+    <p>You can check the progress of the downloads in the Terminal where ComfyUI Server was launched.</p>
+    <p>The <code>.pth</code> files are installed automatically in <code>ComfyUI/models/upscale_models/</code></p>
+</div>
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>DOWNLOAD ANIMATEDIFF MOTION MODELS</h2>
+
+
+<div class="task">
+
+    <h3>INSTALL AN ANIMATEDIFF MOTION MODEL</h3>
+    <h4>In the search box, search for <code>v3_sd15_mm</code>.<br>
+        Enable the <b>top left checkbox</b> to select all the search results.<br>
+        Click on <b>Install</b> (bottom left).</h4>
+
+        <img src="../images/01_INSTALL/0047.png">
+
+    <p>You can check the progress of the download in the Terminal where ComfyUI Server was launched.</p>
+    <p>The <code>.ckpt</code> file is installed automatically in <code>ComfyUI/models/animatediff_models/</code></p>
+</div>
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>REFRESH COMFYUI</h2>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>CLOSE THE MODEL MANAGER</h3>
+        <h4>Click <b>Close</b>.</h4>
+        </td><td>
+            <img src="../images/01_INSTALL/models_0012.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>CLOSE THE MANAGER</h3>
+        <h4>Click <b>Close</b>.</h4>
+        </td><td>
+            <img src="../images/01_INSTALL/models_0013.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>REFRESH COMFYUI</h3>
+        <h4>Click <b>Refresh</b> in the main toolbar.</h4>
+        </td><td>
+            <img src="../images/01_INSTALL/0046.png">
+        </td></tr></table>
+        <p>ComfyUI Server scans the <code>ComfyUI/models</code> directory and makes newly installed models available for use.</p>
+</div>
+
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+
+
+
+<div class="checklist-block">
+    <h3>Are the AI models downloaded?</h3>
+    <p> Yes. All the models from the list have been downloaded and installed.</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Go to <a href="07_ADJUSTING_PREFERENCES.html">Chapter 07: Adjusting Preferences</a>.</p>
+</div>
+
+</body>
+</html>

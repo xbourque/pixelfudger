@@ -1,0 +1,355 @@
+/* --- Copyright 2024 Xavier Bourque Pixelfudger --- */
+/* --- Do not share or reproduce this content, style sheet or any associated files without permission --- */
+
+/* ---- IMPORT GOOGLE FONTS ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+
+/* ---- DEFAULT FONT, BACKGROUND COLOR ---- */
+body {
+    font-family: 'EB Garamond', serif;
+    font-weight: 600; /* EB Garamond Medium */
+    font-size: 14pt;
+    margin-top: 100px;
+    margin-bottom: 800px;
+    /*background-color: #180e08;*/
+}
+
+
+
+
+/* ---- PARAGRAPH TEXT COLOR ---- */
+p {
+    color: #57351c;
+    background-color: #e6d2af;
+    page-break-inside: avoid;
+}
+
+p b, p strong {
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+
+
+/* ---- NORMAL LINKS ----*/
+a {
+    color: #204860;
+    text-decoration: underline; /* Optionally, add an underline when hovered */
+}
+
+a:hover {
+    color: #4090bf;
+}
+
+a:active {
+    color: #a0c8df;
+}
+
+
+
+/* ---- DEFAULTS FOR MOST BLOCKS ----*/
+h1, h2, h3, h4, h5, h6, div, pre, p {
+	border-radius: 6px; /* Rounded corners */
+	padding: 10px; /* Padding inside the block */
+    margin: 10px auto; /* Center the block with margin */
+    box-sizing: border-box; /* Include padding in the width */
+    max-width: 1024px;
+    text-align: left;
+    page-break-inside: avoid;
+}
+
+
+/* ---- HEADERS ---- */
+h1, h2, h3, h4 {
+	font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+    font-weight: 900; /* Inter Black */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #57351c; /* Dark brown color */
+    background-color: #EEEEEE; /* light gray */
+}
+
+
+h1 { /* Page Title */
+    font-size: 56pt;
+}
+
+h2 { /* Section Title */
+    font-size: 36pt;
+    margin-top: 200px;
+    page-break-before: always;
+}
+
+
+h3 { /* Task Title */
+    font-size: 24pt;
+    text-align: left;
+    color: #e6d2af; 
+    width: 100%; 
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+}
+
+h4 { /* Task description */
+    font-weight: 500;
+    font-size: 12pt;
+    text-align: left;
+    color: #BBBBBB; 
+    width: 100%; 
+    padding-top: 0px;
+    margin-top: 0px ;
+}
+
+h4 strong, h4 b { /* Task description hilite */
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 500;
+}
+
+
+
+
+/*---- TASK DESCRIPTION LINKS ----*/
+h4 a { /* Task description links */
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; /* JetBrains Mono Medium */
+    font-size: 12pt;
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+
+h4 a:hover { /* Task description links (hover) */
+    color: #58b3e7; /* Set a different color for links when hovered */
+    text-decoration: underline; /* Optionally, add an underline when hovered */
+}
+
+/* Style for active hyperlinks */
+h4 a:active {
+    color: #bffffe; /* Set the desired color for active links */
+}
+
+h5, pre, code {
+	font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; /* JetBrains Mono Medium */
+}
+
+h5, pre {
+    text-align: left;
+    background-color: #003340;
+}
+
+
+
+
+
+/* ---- MONOSPACED TEXT ---- */
+code {
+    font-size: 12pt;
+    color: #000000;
+    background-color: #DDDDDD;
+}
+
+
+h5 { /* Terminal command */
+    font-size: 12pt;  
+    color: #b8e186; 
+    /*white-space: nowrap;*/
+    
+}
+
+pre { /* Terminal output (code block) */
+    font-size: 9pt;
+    color: #aaaaaa;
+    width: 100%; /* 90% of the screen width */
+    overflow: auto;
+}
+
+pre b, pre strong { /* Terminal output Hilite A */
+    color: #b8e186; /*light green*/
+    font-weight: 500;
+}
+
+pre i, pre em { /* Terminal output Hilite B */
+    color: #FFaa00; /* Orange */
+    font-style: normal;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+td {
+    vertical-align: middle; /* Align content vertically to the middle */
+    width: 50%;
+    padding: 0px;
+}
+
+
+/* ---- DEFAULT IMAGE SIZE, ROUNDED CORNERS ---- */
+img { /* Set default image size to 400px wide, rounded corners */
+    width: 75%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    margin: 10px auto;
+    /*clip-path: inset(5px 5px 5px 5px);*/
+    
+}
+
+
+
+
+/* ---- OVERFLOW SCROLLBARS ----*/
+pre::-webkit-scrollbar, h5::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; /* For horizontal scrollbar */
+}
+
+pre::-webkit-scrollbar-track, h5::-webkit-scrollbar-track {
+    background: #6f482b;
+    border-radius: 5px;
+}
+
+pre::-webkit-scrollbar-thumb, h5::-webkit-scrollbar-thumb {
+    background: #502e1a;
+    border-radius: 10px;
+}
+
+pre::-webkit-scrollbar-thumb:hover, h5::-webkit-scrollbar-thumb:hover {
+    background: #3b2112;
+}
+
+
+
+
+/* ---- DEFAULT DIV (i.e. TASK BLOCKS) ---- */
+.task {
+    background-color: #57351c;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.text-editor {
+    background-color: #c9c9c9;
+    color: #000000;
+    font-size: 12pt;
+}
+
+
+.header-bar {
+    background-color: #57351c;
+    color: #e6d2af;
+    margin-top: 10px; 
+    padding-top: 10px;
+    padding-right: 20px;
+    min-height: 30px;
+}
+
+.header-bar.top {
+    font-size: 36pt; 
+    font-family: cookie; 
+    font-weight: 100;
+    text-align: right;
+
+}
+
+.header-bar.bottom {
+    font-size: 12pt; 
+    font-family: "EB Garamond"; 
+    font-weight: 500;
+    text-align: center;
+    color: #EEEEEE
+
+}
+
+
+
+
+@media print {
+
+    h2 {
+        margin-top: 10px
+    }
+}
+
+
+
+
+.checklist-block {
+    text-align: center;
+    background-color: #57351c;
+    margin-bottom: 65px;
+    position: relative; /* Relative positioning for the bubble */
+}
+
+.checklist-block h3 {
+    text-align: center;
+}
+
+.checklist-block p {
+    text-align: center;
+    font-size: 18pt;
+}
+
+.checklist-block::after {
+    display: block; width: 0; content: "";
+    border: 45px solid transparent;
+    border-top-color: #57351c;
+    border-bottom: 0;
+    position: absolute;
+    bottom: -40px; left: calc(50% - 45px);
+}
+
+.conclusion-block {
+    padding: 0px;
+}
+
+.conclusion-block p {
+    
+    font-size: 24pt;
+    text-align: center;
+    color: #57351c; /* Dark brown color */
+    background-color: #EEEEEE; /* light gray */
+    
+
+
+}
+
+
+.index-block {
+    padding: 0px;
+}
+
+.index-block p {
+    
+    font-size: 24pt;
+    text-align: left;
+    color: #57351c; /* Dark brown color */
+    background-color: #EEEEEE; /* light gray */
+    
+
+
+}
+
+
+
+
+
+

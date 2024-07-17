@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 Installing ComfyUI on Windows</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+<div class="header-bar top">Pixelfudger</div>
+
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>INSTALLING COMFYUI ON WINDOWS</h1>
+
+<div class="header-bar bottom">
+All rights reserved. Do not share or distribute without permission. 
+&copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+
+<!-- ----DOCUMENT DESCRIPTION----------------  -->
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL 7-ZIP</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<table><tr><td>
+    <h3>DOWNLOAD 7-ZIP</h3>
+    <h4>Go to <a target="_blank" href='http://www.7-zip.org'>7-Zip.org</a>.<br>
+        Download <b>7-Zip for Windows 64-bits x64</b>.<br>
+    </td><td>
+    <img src="../images/01_INSTALL/image21.png">
+</td></tr></table>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>RUN THE 7-ZIP INSTALLER</h3>
+        <h4>Locate the download and <b>run the 7-Zip installer</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image5.png">
+    </td></tr></table>
+</div>
+
+
+
+
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A DESTINATION DIRECTORY</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>CREATE AN EMPTY COMFYUI DIRECTORY</h3>
+        <h4>In a <b>File Explorer</b>, create a <b>New Folder</b> at <code>C:\comfyui\</code></h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image15.png">
+    </td></tr></table>
+    <p>Plan for enough disk space! ComfyUI (including AI models required for this tutorial) uses about 70GB of disk space.</p>
+
+    <p>If you don't want to install on your <code>C:\</code> drive, choose an install directory close to the root
+    folder of your desired disk (for example: <code>D:\comfyui\</code>). Very long file paths can
+    break Python on Windows.</p>
+</div>
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL COMFYUI</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>DOWNLOAD COMFYUI</h3>
+        <h4>In a web browser, go to the <a target="_blank" href="https://github.com/comfyanonymous/ComfyUI/releases">ComfyUI GitHub Release Page</a>.<br>
+            Click on <a target="_blank" href="https://github.com/comfyanonymous/ComfyUI/releases/download/latest/ComfyUI_windows_portable_nvidia_cu121_or_cpu.7z">Download Link with stable pytorch 2.3 cu121</a>.<br>
+            Save the download to <code>C:\comfyui\</code>.
+            </h4>
+    </td><td>
+        <img src="../images/01_INSTALL/image12.png">
+    </td></tr></table>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>EXTRACT THE COMFYUI ARCHIVE</h3>
+        <h4>In a <b>File Explorer</b>, locate the <b>ComfyUI .7z file</b>. <br>
+            <b>Right-click</b> on the file.<br>
+            Choose <b>Show More Options...</b> -> <b>7-Zip</b> -> <b>Extract Here</b><br>
+        </h4>
+    </td><td>
+        <img src="../images/01_INSTALL/image20.png">
+    </td></tr></table>
+    <p>The ComfyUI archive (inlcuding a self-contained Python 3.11 environment) is extracted to <code>C:\comfyui\ComfyUI_windows_portable_nvidia_cu121_or_cpu\</code>.</p>
+    <p>After extracting the contents of the archive, you can move the ComfyUI <code>.7z</code> file to the Recycle Bin if you wish.</p>
+</div>
+
+
+<div class="task">
+        <h3>RENAME THE FOLDER</h3>
+        <h4>Rename the <code>ComfyUI_windows_portable_nvidia_cu121_or_cpu</code> folder to <code>portable</code>.
+        </h4>
+    <p>The ComfyUI self-contained installation is now located at <code>C:\comfyui\portable\</code>.</p>
+</div>
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL THE 'MANAGER'</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>DOWNLOAD THE COMFYUI MANAGER</h3>
+        <h4>In a <b>Web Browser</b>, go to the <br>
+            <a target="_blank" href="https://github.com/ltdrdata/ComfyUI-Manager"> ComfyUI-Manager GitHub repository</a>.<br>
+            Click <b>Code</b> (top right). Choose <b>Download ZIP</b>. 
+        </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image6.png">
+    </td></tr></table>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>EXTRACT THE COMFYUI-MANAGER ARCHIVE</h3>
+        <h4>In a <b>File Explorer</b>,<br> <b>right-click</b> on <code>ComfyUI-Manager-main.zip</code>.<br>
+            Choose <b>Show More Options</b> -> <b>7Zip</b> -> <b>Extract Here</b>            
+        </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image19.png">
+    </td></tr></table>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>MOVE COMFYUI-MANAGER TO 'CUSTOM NODES'</h3>
+        <h4>In a <b>second File Explorer</b>.
+            Navigate to <code>C:\comfyui\portable\ComfyUI\custom_nodes</code>.<br>
+            Move the <code>ComfyUI-Manager-main</code> folder to the <code>custom_nodes</code> folder.
+        </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image1.png">
+    </td></tr></table>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>START THE COMFY UI SERVER</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <table><tr><td>
+        <h3>START THE COMFYUI SERVER</h3>
+        <h4>In a <b>File Explorer</b>, navigate to <code>C:\comfyui\portable\</code>.<br>
+            Double-click on <code>run_nvidia_gpu.bat</code>.            
+        </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image14.png">
+    </td></tr></table>
+
+    <p>If you do not have a supported GPU, you can run ComfyUI in (slow!) CPU mode with <code>run_cpu.bat</code> instead.</p>
+
+</div>
+
+<!-- ----INFO BLOCK -------------------------  -->
+<p>
+    The ComfyUI server starts in a new Command Prompt window.
+    <img src="../images/01_INSTALL/image16.png">
+</p>
+
+<!-- ----INFO BLOCK -------------------------  -->
+<p>
+    A new web browser window opens and navigates automatically to <code>http://127.0.0.1:8188</code>.<br>
+    Make sure the Manager button is visible in the toolbar on the right.<br>
+    Bookmark this address for easy access in the future.<br>
+
+    <img src="../images/01_INSTALL/image3.png">
+</p>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<p>
+To shutdown the ComfyUI server, simply close the Command Prompt window.<br>
+(Don't shut it down yet, we still have a few things to configure!)          
+   <img src="../images/01_INSTALL/image11.png">
+</p>
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+<div class="checklist-block">
+<h3>Are you able to launch ComfyUI on your computer?</h3>
+<p> Yes. The ComfyUI interface is up and running on my computer.</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Go to <a href="04_INSTALL_COMFYSPACE.html">Chapter 04: Installing Comfyspace.</a></p>
+</div>
+
+
+
+</body>
+</html>
+			

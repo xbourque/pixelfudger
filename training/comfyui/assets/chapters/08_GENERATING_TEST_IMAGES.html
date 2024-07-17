@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08 Generating Test Images</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+
+<div class="header-bar top">Pixelfudger</div>
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>GENERATING TEST IMAGES</h1>
+
+<div class="header-bar bottom">
+    All rights reserved. Do not share or distribute without permission. 
+    &copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+<p>To make sure our ComfyUI installation is working as intended, we will generate two images using text prompts:
+    <br>
+    - An image using a Stable Diffusion 1.5 based checkpoint (Dreamshaper 8).<br>
+    - An image using a Stable Diffusion XL based checkpoint (Juggernaut XL Lightning).<br>
+    <br>
+    This document will guide on how to generate these images.
+</p>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>GENERATING AN SD 1.5 IMAGE</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN COMFYSPACE</h3>
+        <h4><b>Comfyspace Toolbar</b> -> <b>Folder icon</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager01.png">
+    </td></tr></table>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN THE SD 1.5 TEST WORKFLOW</h3>
+        <h4><b>WORKFLOWS</b> -> <b>00_START_HERE</b> -> <b>04_SD_1.5_TEST</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0048.png">
+    </td></tr></table>
+    <p>The Dreamshaper 8 / Stable Diffusion 1.5 demo workflow opens.
+        <img src="../images/01_INSTALL/0029.png">
+
+    </p>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>GENERATE AN IMAGE</h3>
+        <h4>Press <b>Queue Prompt</b> or <br>
+            <b>Ctrl+Enter</b> (<b>CMD+Return</b> on Mac).</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0030.png">
+    </td></tr></table>
+    <p>After a moment, ComfyUI generates an image using the Dreamshaper 8 checkpoint.
+        <img src="../images/01_INSTALL/0031.png">
+    </p>
+<p> If you cannot generate an image, make sure that the Dreashaper 8 checkpoint is installed here: <br>
+<code>ComfyUI/models/checkpoints/SD15/DreamShaper_8_pruned.safetensors</code></p>
+</div>
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>GENERATING AN SDXL IMAGE</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN WORKSPACE MANAGER</h3>
+        <h4><b>Workspace Toolbar</b> -> <b>Folder icon</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager01.png">
+    </td></tr></table>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN THE SDXL TEST WORKFLOW</h3>
+        <h4><b>WORKFLOWS</b> -> <b>START_HERE</b> -> <b>05_SD_XL_TEST</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0049.png">
+    </td></tr></table>
+    <p>The Juggernaut 9 XL Lightning / Stable Diffusion XL demo workflow opens.
+        <img src="../images/01_INSTALL/0033.png">
+
+    </p>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>GENERATE AN IMAGE</h3>
+        <h4>Press <b>Queue Prompt</b> or <br>
+            <b>Ctrl+Enter</b> (<b>CMD+Return</b> on Mac).</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0030.png">
+    </td></tr></table>
+    <p>After a moment, ComfyUI generates an image using the Juggernaut 9 XL Lightning checkpoint.
+        <img src="../images/01_INSTALL/0034.png">
+    </p>
+<p> If you cannot generate an image, make sure that the Juggernaut 9 XL Lightning checkpoint is installed here: <br>
+<code>ComfyUI/models/checkpoints/SDXL/lightning/juggernautXL_v9Rdphoto2Lightning.safetensors</code></p>
+</div>
+
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+<div class="checklist-block">
+<h3>Did you generate images with Dreamshaper and JuggernautXL?</h3>
+<p> Yes, I was able to generate images!</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Congratulations! You have completed your ComfyUI installation.<br>
+        You are now ready to begin the live class. See you soon!</p>
+</div>
+
+</body>
+</html>

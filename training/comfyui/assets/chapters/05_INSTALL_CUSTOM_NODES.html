@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 Installing Custom Nodes</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+
+<div class="header-bar top">Pixelfudger</div>
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>INSTALLING CUSTOM NODES</h1>
+
+<div class="header-bar bottom">
+    All rights reserved. Do not share or distribute without permission. 
+    &copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+<p>ComfyUI community developed plug-ins are called <b>custom nodes</b>.<br>
+<br>
+These custom node packs are required to complete the exercises in this course:<br>
+<a target="_blank" href="https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved">AnimateDiff Evolved</a><br>
+<a target="_blank" href="https://github.com/evanspearman/ComfyMath">ComfyMath</a><br>
+<a target="_blank" href="https://github.com/Acly/comfyui-inpaint-nodes">ComfyUI Inpaint Nodes</a><br>
+<a target="_blank" href="https://github.com/cubiq/ComfyUI_IPAdapter_plus">ComfyUI_IPAdapter_plus</a><br>
+<a target="_blank" href="https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet">ComfyUI-Advanced-ControlNet</a><br>
+<a target="_blank" href="https://github.com/Munkyfoot/ComfyUI-TextOverlay">ComfyUI-TextOverlay</a><br>
+<a target="_blank" href="https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite">ComfyUI-VideoHelperSuite</a><br>
+<a target="_blank" href="https://github.com/Fannovel16/comfyui_controlnet_aux">ComfyUI's Control Net Aux Preprocessors</a><br>
+<a target="_blank" href="https://github.com/crystian/ComfyUI-Crystools">Crystools</a><br>
+<a target="_blank" href="https://github.com/JPS-GER/ComfyUI_JPS-Nodes">JPS Custom Nodes for ComfyUI</a><br>
+<a target="_blank" href="https://github.com/melMass/comfy_mtb">MTB Nodes</a><br>
+<a target="_blank" href="https://github.com/chrisgoringe/cg-use-everywhere">Use Everywhere (UE Nodes)</a><br>
+<br>
+This document will guide you on how to install them.<br>
+<br>
+Note that some of these custom nodes will fail to load if you are not running ComfyUI in a Python 3.11 environment.<br>
+Please make sure that you are running ComfyUI in a Python 3.11 environment to ensure maximum compatibility.
+</p>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>OPEN THE CUSTOM NODES WORKFLOW</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN COMFYSPACE</h3>
+        <h4><b>Comfyspace Toolbar</b> -> <b>Folder icon</b>.
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager01.png">
+    </td></tr></table>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN THE 'CUSTOM NODES' WORKFLOW</h3>
+        <h4>Click on <b>01_GETTING_STARTED_WORKFLOWS</b> -> <b>01_CUSTOM_NODES</b> </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0059.png">
+    </td></tr></table>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>CLOSE THE 'NODE TYPES NOT FOUND' MESSAGE</h3>
+        <h4>Click on <b>Close</b>. </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager07.png">
+    </td></tr></table>
+<p>ComfyUI warns us that some nodes in the Workflow are not installed on our system. Missing nodes
+    are shown in red.
+    <img src="../images/01_INSTALL/workspace_manager08.png">
+</p>
+</div>
+
+<h2>INSTALL MISSING NODES WITH 'MANAGER'</h2>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN MANAGER</h3>
+        <h4><b>Toolbar -> Manager</b>
+        </td><td>
+        <img src="../images/01_INSTALL/workspace_manager09.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN THE MISSING NODES MANAGER</h3>
+        <h4>Click on <b>Install Missing Custom Nodes</b>.
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager12.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>INSTALL THE MISSING NODES</h3>
+        <h4>Click on the <b>Checkbox</b> in the upper left corner to select all the missing nodes.<br>
+            Click on <b>Install</b>.</h4>
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager13.png">
+        </td></tr></table>
+        <p>The Manager installs custom nodes from their respective GitHub repositories.</p>
+        <p>You can monitor the progress of the installation in the Terminal where ComfyUI server is running.</p>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>RESTART COMFYUI SERVER</h3>
+        <h4>Click on <b>Restart</b>.
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager14.png">
+        </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>OK</h3>
+        <h4>Click on <b>OK</b>.
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager15.png">
+        </td></tr></table>
+        <p>The ComfyUI Server restarts. Observe the restart process in the Terminal where ComfyUI was started.</p>
+        <p>If the ComfyUI Server fails to restart, press <code>CTRL+C</code> in the Terminal (or close 
+            the Terminal) to stop the server.
+        Relaunch ComfyUI Server manually.</p>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>REFRESH THE COMFYUI INTERFACE PAGE</h3>
+        <h4>Click on your web browser's <b>Refresh</b> button.
+        </td><td>
+            <img src="../images/01_INSTALL/workspace_manager16.png">
+        </td></tr></table>
+    <p>Missing nodes have been installed. There are no more red nodes in the workflow.
+        <img src="../images/01_INSTALL/workspace_manager17.png">
+    </p>
+</div>
+
+
+
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+<div class="checklist-block">
+<h3>Are custom nodes installed successfully?</h3>
+<p> Yes. There are no more red nodes in the Install Custom Nodes Workflow.</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Go to <a href="06_INSTALL_AI_MODELS.html">Chapter 06: Installing AI Models</a>.</p>
+</div>
+
+</body>
+</html>

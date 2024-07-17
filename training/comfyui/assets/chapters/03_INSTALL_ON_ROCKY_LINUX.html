@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 Installing ComfyUI on Windows</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+
+<div class="header-bar top">Pixelfudger</div>
+
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>INSTALLING COMFYUI ON ROCKY LINUX</h1>
+
+<div class="header-bar bottom">
+    All rights reserved. Do not share or distribute without permission. 
+    &copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+<p>To generate AI images with ComfyUI on Rocky Linux you need the following prerequisites:<br>
+    <br>
+    - A Python 3.11 installation (i.e. <code>python3.11</code>, <code>pip</code> and <code>python3-virtualenv</code> packages).<br>
+    - An hardware accelerated PyTorch installation appropriate for your GPU.<br>
+    - The <code>git</code> tool.<br>
+    - A copy of the contents of the <a target="_blank" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI GitHub repository</a>.<br>
+    - A copy of the contents of the <a target="_blank" href="https://github.com/ltdrdata/ComfyUI-Manager">ComfyUI-Manager GitHub repository</a>.<br>
+    - Some extra Python modules required by ComfyUI (installed via <code>pip</code>).<br>
+    - Some ComfyUI custom nodes (i.e. community developed ComfyUI plugins).<br>
+    - 70GB of disk space to install some AI models (also known as checkpoints).<br>
+    <br>
+This documentation will guide you through the installation process of all these prerequisites.<br>
+Administrator (i.e. <code>sudo</code>) privileges are required for some parts of this guide.
+</p>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A DESTINATION DIRECTORY</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+
+<div class="task">
+    <table><tr><td>
+        <h3>OPEN A TERMINAL</h3>
+        <h4><b>App Grid</b> (Super+A) -> search "<b>terminal</b>" -> <b>Terminal</b>
+        </td><td>
+        <img src="../images/01_INSTALL/image18.png">
+    </td></tr></table>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CREATE AN EMPTY DESTINATION DIRECTORY</h3>
+<h5>sudo mkdir -p /opt/comfyui</h5>
+<pre>[albert@linuxbox] [~]
+> <b>sudo mkdir -p /opt/comfyui</b>  
+</pre>
+<p>Plan for enough disk space! ComfyUI (including AI models required for this tutorial) uses about 70GB of disk space.</p>
+</div>
+
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>ENABLE READ/WRITE PERMISSIONS</h3>
+<h5>sudo chmod 777 /opt/comfyui</h5>
+<pre>[albert@linuxbox] [~]
+> <b>sudo chmod 777 /opt/comfyui</b>  
+</pre>
+<p>The <code>chmod</code> command enables read/write permissions for our destination directory.</codde></p>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>NAVIGATE TO THE COMFYUI DIRECTORY</h3>
+<h5>cd /opt/comfyui</h5>
+<pre>[albert@linuxbox] [~]
+> <b>cd /opt/comfyui</b>
+[albert@linuxbox] [<i>/opt/comfyui</i>]
+</pre>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL LINUX PACKAGES</h2>
+
+
+<div class="task">
+<h3>INSTALL GIT AND PYTHON WITH THE DNF PACKAGE MANAGER</h3>
+<h5>sudo dnf install git python3.11 pip python3-virtualenv</h5>
+<pre>[albert@linuxbox] [/opt/comfyui]
+> <b>sudo dnf install git python3.11 pip python3-virtualenv</b>
+Last metadata expiration check: 0:00:17 ago on Fri 12 Jul 2024 04:02:21 PM EDT.
+Package git-2.43.0-1.el9.x86_64 is already installed.
+Dependencies resolved.
+================================================================================
+ Package                       Arch     Version               Repository   Size
+================================================================================
+Installing:
+ python3-pip                   noarch   21.2.3-8.el9          appstream   1.7 M
+ python3-virtualenv            noarch   20.21.1-7.el9         epel        202 k
+ python3.11                    x86_64   3.11.7-1.el9_4.1      appstream    26 k
+Upgrading:
+ git                           x86_64   2.43.5-1.el9_4        appstream    50 k
+ git-core                      x86_64   2.43.5-1.el9_4        appstream   4.4 M
+ git-core-doc                  noarch   2.43.5-1.el9_4        appstream   2.7 M
+ perl-Git                      noarch   2.43.5-1.el9_4        appstream    37 k
+Installing dependencies:
+ libnsl2                       x86_64   2.0.0-1.el9.0.1       appstream    30 k
+ mpdecimal                     x86_64   2.5.1-3.el9           appstream    85 k
+ python3-distlib               noarch   0.3.2-1.el9           epel        192 k
+ python3-filelock              noarch   3.7.1-1.el9           epel         24 k
+ python3-platformdirs          noarch   2.5.4-1.el9           epel         31 k
+ python3-wheel-wheel           noarch   1:0.36.2-8.el9        crb          42 k
+ python3.11-libs               x86_64   3.11.7-1.el9_4.1      appstream   9.3 M
+ python3.11-pip-wheel          noarch   22.3.1-5.el9          appstream   1.4 M
+ python3.11-setuptools-wheel   noarch   65.5.1-2.el9          appstream   712 k
+ python3.11-wheel-wheel        noarch   0.38.4-3.el9          crb          42 k
+
+Transaction Summary
+================================================================================
+Install  13 Packages
+Upgrade   4 Packages
+
+Total download size: 21 M
+<i>Is this ok [y/N]:</i> <b>y</b>
+</pre>
+<p>At the <code>Is this OK [y/N]:</code> prompt, type <code>y</code> and press <code>ENTER</code>.</p>
+<p>The DNF package manager installs <code>git</code>, <code>pip</code>, <code>python</code>, <code>virtualenv</code> and dependencies.</p>
+
+<p>Note that some packages require access to the <a target="_blank" href="https://docs.fedoraproject.org/en-US/epel/#_quickstart">EPEL and CRB repositories</a>.<br>
+Use <code>dnf repolist</code> to check which repositories are installed on your system.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL COMFYUI</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CLONE THE COMFYUI GITHUB REPOSITORY</h3>
+<h5>git clone https://github.com/comfyanonymous/ComfyUI.git</h5>
+<pre>[albert@linuxbox] [/opt/comfyui]
+> <b>git clone https://github.com/comfyanonymous/ComfyUI.git</b>
+Cloning into 'ComfyUI'...
+remote: Enumerating objects: 11530, done.
+remote: Counting objects: 100% (116/116), done.
+remote: Compressing objects: 100% (82/82), done.
+remote: Total 11530 (delta 53), reused 72 (delta 33), pack-reused 11414
+Receiving objects: 100% (11530/11530), 5.63 MiB | 4.18 MiB/s, done.
+Resolving deltas: 100% (7778/7778), done.
+</pre>
+<p>The <code>git clone</code> command downloads all the files from the <a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI GitHub repository</a> into <code>/opt/comfyui/ComfyUI/</code>.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A VIRTUAL PYTHON ENVIRONMENT</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CREATE A PYTHON VIRTUAL ENVIRONMENT</h3>
+<h5>python3.11 -m venv ./venv</h5>
+<pre>[albert@linuxbox] [/opt/comfyui]
+> <b>python3.11 -m venv ./venv</b>
+</pre>
+<p>Python creates a Python 3.11 virtual environment that is self-contained inside the <code>/opt/comfyui/venv</code> directory.
+</p>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>ACTIVATE THE VIRTUAL ENVIRONMENT</h3>
+<h5>source ./venv/bin/activate</h5>
+<pre>[albert@linuxbox] [/opt/comfyui]
+> <b>source ./venv/bin/activate</b>
+<i>(venv)</i> [albert@linuxbox] [/opt/comfyui]
+</pre>
+<p>The <code>activate</code> shell script activates our self-contained Python environment.</p>
+<p>The <code>(venv)</code> at the start of our command prompt tells us that our virtual environment is active.</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>UPDATE THE PIP PACKAGE MANAGER</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>UPDATE THE PIP PACKAGE MANAGER</h3>
+<h5>pip install --upgrade pip</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui]
+> <b>pip install --upgrade pip</b>
+Requirement already satisfied: pip in ./venv/lib/python3.9/site-packages (21.2.3)
+Collecting pip
+    Downloading pip-24.1-py3-none-any.whl (1.8 MB)
+        |████████████████████████████████| 1.8 MB 2.2 MB/s 
+Installing collected packages: pip
+    Attempting uninstall: pip
+    Found existing installation: pip 21.2.3
+    Uninstalling pip-21.2.3:
+        Successfully uninstalled pip-21.2.3
+<i>Successfully installed pip-24.1</i>
+</pre>
+<p>The <code>pip</code> Python package manager updates itself to the latest version.</p>
+<p><code>pip</code> is used to install Python modules from the <a href="https://pypi.org/">PyPI repository</a>. </p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL PYTORCH</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>INSTALL PYTORCH FOR NVIDIA CUDA</h3>
+<h5 style="font-size: 10pt;">pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121</h5>
+<pre>[... output truncated ...]
+Installing collected packages: nvidia-nvjitlink-cu12, nvidia-cusparse-cu12, nvidia-cublas-cu12, mpmath, MarkupSafe, filelock, typing-extensions, triton, sympy, nvidia-nvtx-cu12, nvidia-nccl-cu12, nvidia-cusolver-cu12, nvidia-curand-cu12, nvidia-cufft-cu12, nvidia-cudnn-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, networkx, jinja2, fsspec, torch, pillow, numpy, torchvision, torchaudio
+Successfully installed MarkupSafe-2.1.5 filelock-3.15.4 fsspec-2024.6.0 jinja2-3.1.4 mpmath-1.3.0 networkx-3.2.1 numpy-2.0.0 nvidia-cublas-cu12-12.1.3.1 nvidia-cuda-cupti-cu12-12.1.105 nvidia-cuda-nvrtc-cu12-12.1.105 nvidia-cuda-runtime-cu12-12.1.105 nvidia-cudnn-cu12-8.9.2.26 nvidia-cufft-cu12-11.0.2.54 nvidia-curand-cu12-10.3.2.106 nvidia-cusolver-cu12-11.4.5.107 nvidia-cusparse-cu12-12.1.0.106 nvidia-nccl-cu12-2.20.5 nvidia-nvjitlink-cu12-12.5.40 nvidia-nvtx-cu12-12.1.105 pillow-10.3.0 sympy-1.12.1 torch-2.3.1+cu121 torchaudio-2.3.1+cu121 torchvision-0.18.1+cu121 triton-2.3.1 typing-extensions-4.12.2
+</pre>
+<p>The <code>pip</code> package manager installs <a target="_blank" href="https://pytorch.org/get-started/locally/">PyTorch for NVIDIA CUDA 12.1</a> inside our self-contained Python environment.</p>
+<p>Make sure you have working NVIDIA CUDA drivers. Use <code>nvidia-smi</code> to check if CUDA is installed on your system.</p>
+<p>AMD GPU users should install the ROCM version of PyTorch instead:<br>
+    <code>pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/rocm6.0</code>
+</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL PYTHON MODULES</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>INSTALL PYTHON MODULES FOR COMFYUI</h3>
+<h5>pip install -r ./ComfyUI/requirements.txt</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui]
+> <b>pip install -r ./ComfyUI/requirements.txt</b> 
+Requirement already satisfied: torch in ./venv/lib/python3.9/site-packages (from -r ./ComfyUI/requirements.txt (line 1)) (2.3.1+cu121)
+Collecting torchsde (from -r ./ComfyUI/requirements.txt (line 2))
+    Downloading torchsde-0.2.6-py3-none-any.whl.metadata (5.3 kB)
+Requirement already satisfied: torchvision in ./venv/lib/python3.9/site-packages (from -r ./ComfyUI/requirements.txt (line 3)) (0.18.1+cu121)
+Requirement already satisfied: torchaudio in ./venv/lib/python3.9/site-packages (from -r ./ComfyUI/requirements.txt (line 4)) (2.3.1+cu121)
+Collecting einops (from -r ./ComfyUI/requirements.txt (line 5))
+    Downloading einops-0.8.0-py3-none-any.whl.metadata (12 kB)
+Collecting transformers>=4.25.1 (from -r ./ComfyUI/requirements.txt (line 6))
+    Downloading transformers-4.41.2-py3-none-any.whl.metadata (43 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.8/43.8 kB 1.3 MB/s eta 0:00:00
+Collecting safetensors>=0.4.2 (from -r ./ComfyUI/requirements.txt (line 7))
+    Downloading safetensors-0.4.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.8 kB)
+[... output truncated ...]
+</pre>
+<p>The <code>pip</code> package manager installs Python modules required by ComfyUI inside our self-contained Python environment.
+</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL THE COMFYUI-MANAGER</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>NAVIGATE TO THE 'CUSTOM NODES' DIRECTORY</h3>
+<h5>cd ./ComfyUI/custom_nodes</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui]
+> <b>cd ./ComfyUI/custom_nodes</b>
+(venv) [albert@linuxbox] [<i>/opt/comfyui/ComfyUI/custom_nodes</i>] %
+</pre>
+</div>
+    
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>INSTALL 'COMFYUI-MANAGER'</h3>
+<h5>git clone https://github.com/ltdrdata/ComfyUI-Manager.git</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui/ComfyUI/custom_nodes]
+> <b>git clone https://github.com/ltdrdata/ComfyUI-Manager.git</b>
+Cloning into 'ComfyUI-Manager'...
+remote: Enumerating objects: 10964, done.
+remote: Counting objects: 100% (1206/1206), done.
+remote: Compressing objects: 100% (346/346), done.
+remote: Total 10964 (delta 913), reused 1048 (delta 859), pack-reused 9758
+Receiving objects: 100% (10964/10964), 8.54 MiB | 6.99 MiB/s, done.
+Resolving deltas: 100% (7979/7979), done.
+</pre>
+<p>The <code>git clone</code> command downloads and installs ComfyUI-Manager from the <a href="https://github.com/ltdrdata/ComfyUI-Manager">ComfyUI-Manager GitHub repository</a> in the <code>/opt/comfyui/ComfyUI/custom_nodes/</code> directory.
+</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A STARTUP SCRIPT</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>NAVIGATE BACK TO YOUR DESTINATION DIRECTORY</h3>
+<h5>cd /opt/comfyui</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui/ComfyUI/custom_nodes]
+> <b>cd /opt/comfyui</b>
+(venv) [albert@linuxbox] [<i>/opt/comfyui/</i>]
+</pre>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CREATE A COMFYUI STARTUP SCRIPT</h3>
+<h5>nano ./comfyui.sh</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui/]
+> <b>nano ./comfyui.sh</b>
+</pre>
+<p>The <code>nano</code> text editor creates an empty text file at <code>/opt/comfyui/comfyui.sh</code>.</p>
+<p>You can use any text editor to edit the <code>comfyui.sh</code> file.</p>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>EDIT THE STARTUP SCRIPT</h3>
+    <h4>Add these lines to the startup script.</h4>
+<pre class="text-editor">#!/bin/bash
+
+#Activate the self-contained Python envrionment.
+source /opt/comfyui/venv/bin/activate
+
+#Launch ComfyUI Server.
+python3 /opt/comfyui/ComfyUI/main.py
+
+</pre>
+<h4> <b>CTRL+O</b> to save the file. <b>ENTER</b> to confirm. <b>CTRL+X</b> to exit.</h4>
+<p>If you do not have a GPU compatible with ComfyUI, you can launch in (slow!) CPU-only mode by using <code> main.py --cpu</code> at the end of the last line instead.<br>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>MAKE THE SCRIPT EXECUTABLE</h3>
+    <h5>chmod +x ./comfyui.sh</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui]
+> <b>chmod +x ./comfyui.sh</b>    
+</pre>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>LINK THE STARTUP SCRIPT TO /USR/LOCAL/BIN</h3>
+    <h5>sudo ln -s /opt/comfyui/comfyui.sh /usr/local/bin/comfyui</h5>
+<pre>(venv) [albert@linuxbox] [/opt/comfyui] %
+> <b>sudo ln -s /opt/comfyui/comfyui.sh /usr/local/bin/comfyui</b>    
+</pre>
+<p>Since <code>/usr/local/bin</code> is in the the <code>$PATH</code> by default, a link from <code>/opt/comfyui/comfyui.sh</code> to <code>/usr/local/bin/comfyui</code> makes the <code>comfyui</code> command accessible from anywhere.
+</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>LAUNCH THE COMFYUI SERVER</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>LAUNCH COMFYUI SERVER</h3>
+    <h5>comfyui</h5>
+<pre>
+(venv) [albert@linuxbox] [/opt/comfyui]
+> <b>comfyui</b>
+[START] Security scan
+[DONE] Security scan
+## ComfyUI-Manager: installing dependencies done.
+** ComfyUI startup time: 2024-06-25 19:29:07.259501
+** Platform: Linux
+** Python version: 3.9.18 (main, Jan 24 2024, 00:00:00) 
+[GCC 11.4.1 20231218 (Red Hat 11.4.1-3)]
+** Python executable: /opt/comfyui/venv/bin/python3
+** Log path: /opt/comfyui/comfyui.log
+
+Prestartup times for custom nodes:
+    0.2 seconds: /opt/comfyui/ComfyUI/custom_nodes/ComfyUI-Manager
+
+Total VRAM 15344 MB, total RAM 15344 MB
+pytorch version: 2.3.1+cu121
+Set vram state to: DISABLED
+Device: cpu
+/opt/comfyui/venv/lib64/python3.9/site-packages/torch/cuda/__init__.py:619: UserWarning: Can't initialize NVML
+    warnings.warn("Can't initialize NVML")
+Using sub quadratic optimization for cross attention, if you have memory or speed issues try using: --use-split-cross-attention
+### Loading: ComfyUI-Manager (V2.42)
+### ComfyUI Revision: 2284 [69d710e4] | Released on '2024-06-25'
+
+Import times for custom nodes:
+    0.0 seconds: /opt/comfyui/ComfyUI/custom_nodes/websocket_image_save.py
+    0.1 seconds: /opt/comfyui/ComfyUI/custom_nodes/ComfyUI-Manager
+
+<i>
+    Starting server
+    
+    To see the GUI go to: http://127.0.0.1:8188
+</i>
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/model-list.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/alter-list.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/github-stats.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json
+[ComfyUI-Manager] default cache updated: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/extension-node-map.json
+    
+</pre>
+<p>The ComfyUI server is now running.
+</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>OPEN THE COMFYUI INTERFACE</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>OPEN A WEB BROWSER</h3>
+    <h4><b>App Grid</b> (Super+A) -> search "<b>chrome</b>" -> <b>Google Chrome</b></h4>
+
+<p>Google Chrome is recommended but ComfyUI will work in most browsers. 
+</p>
+</div>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>NAVIGATE TO THE COMFYUI PAGE</h3>
+    <h4>Navigate to <code>http://127.0.0.1:8188</code></h4>
+
+<p>The ComfyUI user interface appears inside the web browser tab. Make sure the Manager button is in the tool bar. Bookmark this tab for easy access in the future.
+<img src="../images/01_INSTALL/image3.png">
+</p>
+
+
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<p> To shutdown the ComfyUI server press CTRL+C in the Terminal where ComfyUI server is running.<br>
+    (Don't shutdown ComfyUI yet, will still have some things to configure!)</p>
+
+<p>To launch ComfyUI again in the future, simply open a Terminal and run <code>comfyui</code>.
+</p>
+</div>
+
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+<div class="checklist-block">
+<h3>Are you able to launch ComfyUI on your computer?</h3>
+<p> Yes. The ComfyUI interface is up and running on my computer.</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Go to <a href="04_INSTALL_COMFYSPACE.html">Chapter 04: Installing Comfyspace.</a></p>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 Installing ComfyUI on Apple Silicon</title>
+    <link rel="stylesheet" href="../styles/pixelfudger.css">
+</head>
+<body>
+
+
+<div class="header-bar top">Pixelfudger</div>
+<!-- ----DOCUMENT TITLE----------------------  -->
+<h1>INSTALLING COMFYUI ON APPLE SILICON</h1>
+
+<div class="header-bar bottom">
+    All rights reserved. Do not share or distribute without permission. 
+    &copy; 2024 Xavier Bourque / Pixelfudger.
+</div>
+
+<p>To generate AI images with ComfyUI on Apple Silicon you need the following prerequisites:<br>
+    <br>
+    - Apple Command Line Developer tools (mostly for the <code>git</code> tool).<br>
+    - A <a target="_blank" href="https://www.python.org/downloads/release/python-3119/">Python 3.11</a> installation.<br>
+    - An <a target="_blank" href="https://pytorch.org/get-started/locally/">hardware acclerated PyTorch</a> installation for Apple Silicon.<br>
+    - A copy of the contents of the <a target="_blank" href="https://github.com/comfyanonymous/ComfyUI">ComfyUI GitHub repository</a>.<br>
+    - A copy of the contents of the <a target="_blank" href="https://github.com/ltdrdata/ComfyUI-Manager">ComfyUI-Manager GitHub repository</a>.<br>
+    - Some extra Python modules required by ComfyUI (installed via the <code>pip</code> package manager).<br>
+    - Some ComfyUI custom nodes (i.e. community developed ComfyUI plugins).<br>
+    - 70GB of disk space to install some AI models (also known as checkpoints).<br>
+    <br>
+This documentation will guide you through the installation process of all these prerequisites.<br>
+Administrator privileges are required to install Python 3.11.
+</p>
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A DESTINATION DIRECTORY</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>OPEN A TERMINAL</h3>
+    <h4><b>CMD+Space</b> -> <b>Terminal.app</b></h4>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CREATE AN EMPTY DESTINATION DIRECTORY</h3>
+<h5>mkdir /Applications/ComfyUI</h5>
+<pre>albert@macbook ~ % <b>mkdir /Applications/ComfyUI</b>
+albert@macbook ~ %    
+</pre>
+<p>Plan for enough disk space! ComfyUI (including AI models required for this tutorial) uses about 70GB of disk space.</p>
+<p>Your destination directory can be located on an external disk if needed. External disks are accessible via the <code>/Volumes</code> directory.</p>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>NAVIGATE TO THE DESTINATION DIRECTORY</h3>
+<h5>cd /Applications/ComfyUI</h5>
+<pre>albert@macbook ~ % <b>cd /Applications/ComfyUI</b>
+albert@macbook ComfyUI %    
+</pre>
+</div>
+    
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL APPLE COMMAND LINE DEVELOPER TOOLS</h2>
+
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CHECK IF GIT IS INSTALLED</h3>
+<h5>git --version</h5>
+<pre>albert@macbook ComfyUI % <b>git --version</b>
+albert@macbook ComfyUI %    
+</pre>
+<p>If <code>git</code> is not installed already on your computer, you will be asked to install the command line developer tools.</p>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>INSTALL DEVELOPER TOOLS</h3>
+        <h4>If necessary, click on <b>Install</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image13.png">
+    </td></tr></table>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CHECK IF PYTHON 3.11 IS INSTALLED</h3>
+<h5>python3 --version</h5>
+<pre>albert@macbook ComfyUI % <b>python3 --version</b>
+<i>python 3.11.9</i>
+</pre>
+<p> If you don't have Python 3.11.x installed, download the installer from <a target="_blank" href="https://www.python.org/downloads/macos/">python.org</a> here:<br>
+    <a href="https://www.python.org/ftp/python/3.11.9/python-3.11.9-macos11.pkg">https://www.python.org/ftp/python/3.11.9/python-3.11.9-macos11.pkg</a>.<br>
+    Simply double-click on the <code>.pkg</code> file and follow the installer prompts.
+</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL COMFYUI</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CLONE THE COMFYUI GITHUB REPOSITORY</h3>
+<h5>git clone https://github.com/comfyanonymous/ComfyUI.git</h5>
+<pre>albert@macbook ComfyUI % <b>git clone https://github.com/comfyanonymous/ComfyUI.git</b>
+Cloning into 'ComfyUI'...
+remote: Enumerating objects: 11530, done.
+remote: Counting objects: 100% (116/116), done.
+remote: Compressing objects: 100% (82/82), done.
+remote: Total 11530 (delta 53), reused 72 (delta 33), pack-reused 11414
+Receiving objects: 100% (11530/11530), 5.63 MiB | 4.18 MiB/s, done.
+Resolving deltas: 100% (7778/7778), done. 
+</pre>
+<p>The <code>git clone</code> command downloads all the files from the <a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI GitHub repository</a> into the <code>/Applications/ComfyUI/</code> directory.
+</p>
+</div>
+
+
+
+
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A PYTHON VIRTUAL ENVIRONMENT</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>CREATE A PYTHON VIRTUAL ENVIRONMENT</h3>
+<h5>python3 -m venv ./venv</h5>
+<pre>albert@macbook ComfyUI % <b>python3 -m venv ./venv</b>
+albert@macbook ComfyUI % 
+</pre>
+<p>Python creates a self-contained Python environment inside the <code>/Applications/ComfyUI/venv</code> directory.
+</p>
+</div>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>ACTIVATE THE VIRTUAL ENVIRONMENT</h3>
+<h5>source ./venv/bin/activate</h5>
+<pre>albert@macbook ComfyUI % <b>source ./venv/bin/activate</b>
+<i>(venv)</i> albert@macbook ComfyUI % 
+</pre>
+<p>The <code>activate</code> shell script activates our self-contained Python environment.</p>
+<p>The <code>(venv)</code> at the start of our command prompt tells us that our virtual environment is active.
+</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>UPDATE THE PIP PACKAGE MANAGER</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+<h3>UPDATE THE PIP PACKAGE MANAGER</h3>
+<h5>pip3 install --upgrade pip</h5>
+<pre>(venv) albert@macbook ComfyUI % <b>pip3 install --upgrade pip</b>
+Collecting pip
+    Using cached pip-24.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+    Attempting uninstall: pip
+    Found existing installation: pip 20.2.3
+    Uninstalling pip-20.2.3:
+        Successfully uninstalled pip-20.2.3
+<i>Successfully installed pip-24.1</i>
+</pre>
+<p>The <code>pip3</code> package manager inside our virtual environment is updated to the latest version. </p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL PYTORCH</h2>
+
+<!-- ----TASK BLOCK -------------------------  -->
+<div class="task">
+    <h3>INSTALL PYTORCH NIGHTLY</h3>
+    <h5 style="font-size: 9pt;">pip3 install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu</h5>
+    <img style="width: 60%;" src="../images/01_INSTALL/image23.png">
+    <p>The <code>pip3</code> Python package manager installs the PyTorch Python modules inside our virtual environment.</p>
+    <p>For more information about installing PyTorch with hardware acceleration on Apple Silicon, <a target="_blank" href="https://developer.apple.com/metal/pytorch/">see this page</a>.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL PYTHON MODULES</h2>
+<div class="task">
+    <h3>INSTALL PYTHON MODULES FOR COMFYUI</h3>
+    <h5>pip3 install -r ./ComfyUI/requirements.txt</h5>
+    <img src="../images/01_INSTALL/image10.png">
+    <p>The <code>pip3</code> package manager installs Python modules required by ComfyUI inside our virtual environment.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>INSTALL THE 'COMFYUI-MANAGER'</h2>
+
+<div class="task">
+    <h3>NAVIGATE TO THE COMFYUI CUSTOM NODES DIRECTORY</h3>
+    <h5>cd ./ComfyUI/custom_nodes</h5>
+<pre>albert@macbook ComfyUI % <b>cd ./ComfyUI/custom_nodes</b>
+albert@macbook custom_nodes %
+</pre>
+</div>
+
+<div class="task">
+    <h3>INSTALL 'COMFYUI-MANAGER'</h3>
+    <h5>git clone https://github.com/ltdrdata/ComfyUI-Manager.git</h5>
+<pre>(venv) albert@macbook custom_nodes % <b>git clone https://github.com/ltdrdata/ComfyUI-Manager.git</b>
+Cloning into 'ComfyUI-Manager'...
+remote: Enumerating objects: 10964, done.
+remote: Counting objects: 100% (1206/1206), done.
+remote: Compressing objects: 100% (346/346), done.
+remote: Total 10964 (delta 913), reused 1048 (delta 859), pack-reused 9758
+Receiving objects: 100% (10964/10964), 8.54 MiB | 6.99 MiB/s, done.
+Resolving deltas: 100% (7979/7979), done.
+</pre>
+<p>The <code>git clone</code> command downloads and installs ComfyUI-Manager from the <a href="https://github.com/ltdrdata/ComfyUI-Manager">ComfyUI-Manager GitHub repository</a>.<br>
+ComfyUI-Manager is package manager that donwloads and installs custom nodes (plugins) for ComfyUI.</p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>CREATE A STARTUP SCRIPT</h2>
+
+<div class="task">
+    <h3>NAVIGATE BACK TO YOUR DESTINATION DIRECTORY</h3>
+    <h5>cd /Applications/ComfyUI</h5>
+<pre>albert@macbook custom_nodes % <b>cd /Applications/ComfyUI</b>
+albert@macbook ComfyUI %
+</pre>
+</div>
+
+<div class="task">
+    <h3>CREATE A COMFYUI STARTUP SCRIPT</h3>
+    <h5>nano ./comfyui.sh</h5>
+<pre>albert@macbook ComfyUI % <b>nano ./comfyui.sh</b>
+albert@macbook ComfyUI %
+</pre>
+<p>The <code>nano</code> Terminal-based text editor opens a new empty text file.</p>
+<p>If you don't like <code>nano</code>, you can use any text editor to edit the <code>comfyui.sh</code> file.</p>
+</div>
+
+<div class="task">
+    <h3>EDIT THE STARTUP SCRIPT</h3>
+    <h4>Add these lines to the startup script.</h4>
+<pre class="text-editor">#!/bin/zsh
+
+#Activate the Python virtual environment
+source /Applications/ComfyUI/venv/bin/activate
+
+#Launch ComfyUI Server
+python3 /Applications/ComfyUI/ComfyUI/main.py
+</pre>
+<h4> <b>CTRL+O</b> to save the file. <b>ENTER</b> to confirm. <b>CTRL+X</b> to exit.</h4>
+<p>Note that <code>nano</code> requires the use of the <code>CTRL</code> key, not the <code>CMD</code> key.</p>
+<p>If you do not have a GPU compatible with ComfyUI, you can launch in (slow!) CPU-only mode by using <code> main.py --cpu</code> at the end of the last line instead.<br>
+</div>
+
+
+<div class="task">
+    <h3>MAKE THE SCRIPT EXECUTABLE</h3>
+    <h5>chmod +x ./comfyui.sh</h5>
+<pre>albert@macbook ComfyUI % <b>chmod +x ./comfyui.sh</b>
+albert@macbook ComfyUI %
+</pre>
+<p>The <code>chmod</code> command adjusts the permissions of the the <code>comfyui.sh</code> file to make it executable.</p>
+</div>
+
+<div class="task">
+    <h3>OPEN THE CURRENT DIRECTORY IN FINDER</h3>
+    <h5>open .</h5>
+<pre>albert@macbook ComfyUI % <b>open .</b>
+albert@macbook ComfyUI %    
+</pre>
+<p>A new Finder window opens at <code>/Applications/ComfyUI</code>.</p>
+</div>
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>LAUNCH THE COMFYUI SERVER</h2>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>'OPEN WITH' APPLICATION</h3>
+        <h4>Right-click on <code>comfyui.sh</code>.<br>
+            Choose <b>Open With</b> -> <b>Other</b>...
+            </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image4.png">
+    </td></tr></table>
+</div>
+
+
+<div class="task">
+    <table><tr><td>
+        <h3>ENABLE 'ALL APPLICATIONS'</h3>
+        <h4><b>Enable</b> -> <b>All Applications</b></h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0051.png">
+    </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>CHOOSE TERMINAL</h3>
+        <h4>Search for <b>Terminal</b>. <br>
+            Choose  <b>Terminal.app</b> from the search results.
+            </h4>
+        </td><td>
+        <img src="../images/01_INSTALL/image2a.png">
+    </td></tr></table>
+</div>
+
+<div class="task">
+    <table><tr><td>
+        <h3>LAUNCH THE SCRIPT</h3>
+        <h4>Enable "<b>Always Open With</b>". <br>
+            Click <b>Open</b>.</h4>
+        </td><td>
+        <img src="../images/01_INSTALL/0053.png">
+    </td></tr></table>
+    <p>Our <code>comfyui.sh</code> startup script will now always open from the Terminal app when double-clicked.</p>
+    <p>The ComfyUI server starts in a new Terminal window.
+        <img src="../images/01_INSTALL/image7.png">
+    </p>
+</div>
+
+
+<!-- ----SECTION HEADER ---------------------  -->
+<h2>OPEN THE COMFYUI INTERFACE</h2>
+
+
+<div class="task">
+        <h3>OPEN A WEB BROWSER</h3>
+        <h4>Open your favourite <b>web browser</b>.
+            </h4>
+</div>
+
+
+
+<div class="task">
+        <h3>NAVIGATE TO THE COMFYUI PAGE</h3>
+        <h4>Navigate to <a href="http://127.0.0.1:8188">http://127.0.0.1:8188</a>
+        </h4>
+        <p>The ComfyUI user interface appears inside the web browser tab.
+            Make sure the Manager button is visible in the toolbar on the right.
+            Bookmark this tab for easy access in the future.
+
+            <img src="../images/01_INSTALL/image3.png">
+        </p>
+</div>
+
+
+<p>To stop the ComfyUI Server, simply close the terminal window and click <code>Terminate</code> at the prompt.<br>
+(Don't close it now, we still have some stuff to do!)
+<img src="../images/01_INSTALL/image9a.png">
+</p>
+
+
+<p>To launch the ComfyUI server again in the future, simply double-click on <code>/Applications/ComfyUI/comfyui.sh</code>.<br>
+A terminal will open and ComfyUI Server will launch.
+<img src="../images/01_INSTALL/image8a.png">
+</p>
+
+
+<!-- ----FINAL CHECKLIST ---------------------  -->
+<h2>FINAL CHECKLIST...</h2>
+<div class="checklist-block">
+<h3>Are you able to launch ComfyUI on your computer?</h3>
+<p> Yes. The ComfyUI interface is up and running on my computer.</p>
+</div>
+
+<div class="conclusion-block">
+    <p>Go to <a href="04_INSTALL_COMFYSPACE.html">Chapter 04: Installing Comfyspace.</a></p>
+</div>
+
+
+</body>
+</html>
